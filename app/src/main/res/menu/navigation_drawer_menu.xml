@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+          >
+
+    <group android:checkableBehavior="single"
+        >
+
+
+        <item
+
+            android:checked="true"
+            android:id="@+id/item_navigation_drawer_inbox"
+            android:icon="@drawable/ic_home_ikona"
+            android:title="Web shop"
+             />
+
+        <item
+            android:id="@+id/item_navigation_drawer_starred"
+            android:icon="@drawable/ic_action_toggle_star"
+            android:title="Trgovine" />
+        <item
+            android:id="@+id/item_navigation_drawer_sent_mail"
+            android:icon="@drawable/ic_action_content_send"
+            android:title="Plaćanje" />
+        <item
+            android:id="@+id/item_navigation_drawer_drafts"
+            android:icon="@drawable/ic_action_content_drafts"
+            android:title="Servis" />
+        <item
+            android:id="@+id/korpa"
+            android:icon="@drawable/ic_shopping_cart_black_48dp"
+            android:title="Korpa" />
+        <item
+            android:id="@+id/prijava"
+            android:icon="@drawable/dado"
+            android:title="Prijava" />
+    </group>
+
+    <item android:title="Aplikacija">
+        <menu>
+            <item
+                android:id="@+id/item_navigation_drawer_settings"
+                android:icon="@drawable/ic_action_content_mail"
+                android:title="Postavke" />
+            <item
+                android:id="@+id/item_navigation_drawer_help_and_feedback"
+                android:icon="@drawable/ic_action_action_delete"
+                android:title="O Aplikaciji" />
+        </menu>
+    </item>
+
+</menu>

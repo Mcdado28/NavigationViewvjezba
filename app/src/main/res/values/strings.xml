@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Imtec Web Shop</string>
+
+    <string name="search_title">search</string>
+    <string name="search_hint">Pretraga proizvoda</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+</resources>

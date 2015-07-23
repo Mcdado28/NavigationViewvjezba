@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="refresh_progress_1">@color/md_green_800</color>
+    <color name="refresh_progress_2">@color/md_yellow_700</color>
+    <color name="refresh_progress_3">@color/md_blue_800</color>
+    <color name="refresh_progress_4">@color/md_red_700</color>
+</resources>
