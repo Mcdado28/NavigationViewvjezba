@@ -22,7 +22,7 @@ import android.text.Html;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
 
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -42,7 +42,7 @@ import com.parse.SaveCallback;
 
 import org.json.JSONObject;
 
-import java.util.Map;
+
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     WebView webView;
     Intent intent;
     TextView pushnotifikacije;
-
+    String SITE_URL;
 
 
 
@@ -63,6 +63,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+        handleIntent(getIntent());
+
 
 
         ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
@@ -78,28 +83,52 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         });
 
 
+
         ParseObject testObject = new ParseObject("Navvjezba");
         testObject.put("imtec", "hit");
         testObject.saveInBackground();
 
 
-        handleIntent(getIntent());
 
 
 
         webView = (WebView) findViewById(R.id.webi);
-        webView.loadUrl("http://shop.imtec.ba");
+
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAppCacheEnabled(false);
         webView.setWebViewClient(new WebViewClient());
 
         webView.getSettings().setGeolocationEnabled(false);
         webView.getSettings().setLoadsImagesAutomatically(true);
-        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+
 
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setBuiltInZoomControls(true);
+        if (getIntent().getExtras() !=null) {
+
+            try {
+                Bundle b = getIntent().getExtras();
+                JSONObject jsonObject = new JSONObject(b.getString("com.parse.Data"));
+                String data=jsonObject.getString("alert");
+                String url =jsonObject.getString("url");
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                intent.putExtra("SITE_URL",url);
+                startActivity(intent);
+
+                pushnotifikacije.setText(data);
+
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+            webView.loadUrl(getIntent().getStringExtra("SITE_URL"));
+        } else {
+
+            webView.loadUrl("http://shop.imtec.ba");
+
+        }
         webView.setWebViewClient(new WebViewClient() {
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 if (errorCode == -2) {
@@ -136,19 +165,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
         });
 
-        try{
-            Bundle b = getIntent().getExtras();
-            JSONObject jsonObject = new JSONObject(b.getString("com.parse.Data"));
-
-            String url =jsonObject.getString("uri");
-            String data=jsonObject.getString("alert");
-
-
-            pushnotifikacije.setText(data);
-            webView.loadUrl(url);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
 
 
 
@@ -156,8 +172,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         swipeRefreshLayout.setOnRefreshListener(this);
 
 
+
+
+
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 
 
         actionBar = getSupportActionBar();
@@ -179,6 +201,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         }
     }
+
+
 
 
     public class AppConfig {
@@ -270,7 +294,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 
             String query = intent.getStringExtra(SearchManager.QUERY);
-            webView.loadUrl("http://192.168.11.183/shop/index.php?search_query=" + query + "&controller=search&orderby=position&orderway=desc");
+            webView.loadUrl("http://shop.imtec.ba/search?search_query=" + query + "&controller=search&orderby=position&orderway=desc");
         }
     }
 
