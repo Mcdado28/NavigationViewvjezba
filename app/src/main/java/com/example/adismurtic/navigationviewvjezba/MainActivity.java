@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     TextView textView;
     SwipeRefreshLayout swipeRefreshLayout;
     WebView webView;
-    Intent intent;
     TextView pushnotifikacije;
 
 
