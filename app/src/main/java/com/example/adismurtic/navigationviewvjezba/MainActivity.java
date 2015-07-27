@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     WebView webView;
     Intent intent;
     TextView pushnotifikacije;
-    String SITE_URL;
+
 
 
 
@@ -93,18 +93,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 
         webView = (WebView) findViewById(R.id.webi);
-
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setAppCacheEnabled(false);
-        webView.setWebViewClient(new WebViewClient());
-
-        webView.getSettings().setGeolocationEnabled(false);
-        webView.getSettings().setLoadsImagesAutomatically(true);
-
-
-        webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setUseWideViewPort(true);
-        webView.getSettings().setBuiltInZoomControls(true);
         if (getIntent().getExtras() !=null) {
 
             try {
@@ -129,6 +117,19 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             webView.loadUrl("http://shop.imtec.ba");
 
         }
+
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setAppCacheEnabled(false);
+        webView.setWebViewClient(new WebViewClient());
+
+        webView.getSettings().setGeolocationEnabled(false);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+
+
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+
         webView.setWebViewClient(new WebViewClient() {
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 if (errorCode == -2) {
